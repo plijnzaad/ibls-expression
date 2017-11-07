@@ -1,6 +1,10 @@
 # ibls-expression
-This repository contains exercises/code for the UBC Master's course Introduction to Bioinformatics for the Life Sciences
-(you can find it at https://elearning.ubc.uu.nl/course/view.php?id=9# if you have access).
+
+This repository contains exercises/code for the UBC Master's course
+Introduction to Bioinformatics for the Life Sciences. You can find the
+lectures, the data and some reference material at
+https://elearning.ubc.uu.nl/course/view.php?id=9# (access is not
+public).
 
 Data for the exercises comes from a study by Liu et al., who created
 Smchd1 knock-out mice and studied the changes in RNA expression in
@@ -11,8 +15,8 @@ in, amongst others, X-inactivation.
 
 The exercises are inside the comments in the R files. Don't blindly
 copy-paste things; try to really understand what is going on, e.g. by
-playing around with the arguments and by looking up the documentation of
-the functions.
+playing around with function arguments and by looking up the
+documentation of the functions.
 
 The files are, in chronological order (the lecture it goes with is given in parentheses)
 
