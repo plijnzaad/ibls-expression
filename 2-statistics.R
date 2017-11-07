@@ -58,11 +58,13 @@ res <- results(dds, contrast=c("group", "Smchd1-null", "WT"))
 ## find the most significantly changed gene, and plot its counts. Do the
 ## same for the gene that is 'most down' (any surprises there?), and the
 ## gene that is most up.
+plotCounts(dds, gene=which.max(res[,'log2FoldChange']), intgroup="group")
 
-## To find the top 10 genes that changed most in expression, we have first have to
-## sort the results table. In R, this is done as follows:
+## To find the top 10 genes that, in the Smchd1 knock-out, go up most in
+## expression, we have first have to sort the results table. In R, this
+## is done as follows:
 
-order.incr <- order(res[, 'pvalue'])
+order.incr <- order(res[, 'log2FoldChange'])
 res.incr <- res[order.incr, ]
 
 ## order() simply calculates a vector of numbers that puts the rows of

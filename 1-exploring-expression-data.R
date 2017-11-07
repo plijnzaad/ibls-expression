@@ -16,11 +16,16 @@ library(DESeq2)
 ## by us. It contains just one big data object called 'dds'. Load it as follows:
 load('GSE65747.rda')
 
-## If you can't find that file, use the function file.choose(). After picking your file
-## it returns the full path name as a string that you can use, as follows:
+## If you can't find the file you just downloaded you can use the
+## function file.choose(). After picking your file it just returns the
+## full path name as a string. If you assign that string you can
+## subsequently use it
 
-rda.file <- file.choose()
-load(rda.file)
+rda.file <- file.choose()               # '<-' assigns the right-hand side to the left-hand side
+
+rda.file                                # typing in the name of the object displays the content
+
+load(rda.file)                          # now use it to load the actual data
 
 ## The dds object is a "DESeqDataSet", which is essentially a big table
 ## with the counts per gene and per sample. In addition, it contains
@@ -85,23 +90,34 @@ counts(dds[ maximum.at , 1])
 
 ## 9. Use the mean() function to find the mean of the counts in sample 1, and assign it to a variable
 
-## To get an impression of the distribution of reads counts, you can use the hist() function, e.g.:
+## Often, functions can take optional arguments. For example, if your
+## data contains 'NA' (not available) values, you can instruct mean() to
+## remove them by specifying this additional argument as follows:
 
-hist(counts(dds[,1]), nclass=1000)
+mean(mydata,  na.rm=TRUE) # TRUE and FALSE are so-called logical values
 
-## 10. What does the nclass=1000 argument do? Play around with it.
+## (for default values of optional arguments, see the functions documentation)
 
-## 11. Use an xlim=c(lower, upper), argument to 'zoom in', i.e. to just
-## show the bit between 0 and twice the mean of the the read counts (you
-## just saved that in a variable, right?). Adjust the nclass argument if
-## needed.
+## To get an impression of the distribution of reads counts of sample 1,
+## simply pass it to the hist() function. What does it look like?
+
+## To see more details you will have to specify a larger number of
+## histogram bins by specifying an additional nclass argument; try this.
+
+## 10. To 'zoom in', e.g. to just show the bit between 0 and twice the
+## mean of the the read counts (you just saved that in a variable,
+## right?), you have to specify another optional argument, namely
+## xlim=c(lower, upper). Try this (and adjust the nclass argument if
+## needed).
 
 ## Now let's compare the distributions of all the data sets. An easy way
 ## to do that is the boxplot() function.  When given a table such as
 ## returned by counts(dds) it will do a boxplot for each of the columns
 ## in the matrix.
 ## 
-## 12.  Do this, and play with the ylim-argument to make differences
-## between the samples clearer: Which of the samples is the 'odd one
-## out', based on this? Is it a knock-out or wt genotype?
+## 11.  Do this, and supply an ylim-argument to make differences between
+## the samples clearer. (Make sure that the ylim argument is given to
+## the hist() function, not to the counts function!)  Which of the
+## samples is the 'odd one out', based on this? Is it a knock-out or wt
+## genotype?
 
