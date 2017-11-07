@@ -68,7 +68,7 @@ writeLines(con=file("up.txt"), rownames(res[up,]))
 
 ## and likewise for the down genes. It is probably easiest to open this
 ## text file using Notepad++ or Excel, and then copy-paste things from
-## there to the the web tools.
+## there to the web tools.
 
 ## 7. Use http://www.geneontology.org/page/go-enrichment-analysis ) to
 ## analyse your lists of gene names (be sure to select Mouse as
