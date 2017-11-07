@@ -51,7 +51,7 @@ counts(dds[1000,3])
 ## counts for gene gene 'number 101 up to 105', do
 counts(dds[101:105, 2:4])
 
-## But it's better to select rows and colums by name (if there are names ...)
+## But it's better to select rows and colums by name (they not always present, though)
 counts(dds['Smap1', 2:4])                  # note the comma with 'nothing after it', meaning 'the complete row'
 
 ## If, inside the square brackets, you leave a dimension empty, it means: all of that dimension

@@ -10,7 +10,7 @@ dds <- DESeq(dds)                       #this adds things to the 'dds' object
 ## from the previous exercise?
 
 ## 2. To get the read counts after normalization, specify
-## ', normalized=TRUE,' as an extra argument to counts(). Compare the
+## normalized=TRUE as an extra argument to counts(). Compare the
 ## boxplots of the unnormalized data (done in the last exercise of the
 ## previous session) with those of normalized data. Did the
 ## normalization work?
@@ -33,21 +33,25 @@ res <- results(dds, contrast=c("group", "Smchd1-null", "WT"))
 ## 5. By default, plotMA() tries to show most of the data, and chooses
 ## its own y-axis limits. Genes outside the range are shown as
 ## triangles. Play with the ylim argument to show all the data. Better
-## yet, use min() and max() on the results data to find the limits
-## automatically. This will require ignoring the NA's, use the na.rm
-## argument to min() and max() for that)
+## yet, use min() and max() on the 'log2FoldChange' column of your
+## results data to find the limits automatically. To make the min() and
+## max() functions ignore the NA's, you have to also pass an na.rm=TRUE
+## argument.
 
-## 6. Have a look at e.g. the first 10 rows of the results table.
-## What do the columns mean? Why is padj greater than pvalue?
-## What are the statistics for the Smchd1 gene?
+## 6. Have a look at e.g. the first 10 rows of the results table.  What
+## do the columns mean? Why is padj greater than pvalue?  What are the
+## statistics for the Smchd1 gene? (Remember how you selected data on a
+## particular gene in the first exercise).
 
 ## 7. The genes Ndn, Mkrn3 and Peg12 are known to be repressed by
-## Smchd1. Does the statistics confirm this?
+## Smchd1. Do the statistics confirm this?
 
-## 8. Use plot() to make a plot of padj versus pvalue. Where are the
-## differences between the two largest? What multiple testing correction
-## was used? (Feel free to play and use different methods when calling
-## results())
+## 8. Use plot(x=this, y=that) to make a plot of padj versus pvalue
+## (remember how you selected columns in the first exercises). Where are
+## the differences between the two largest? What multiple testing
+## correction was used? Feel free to play and use different multiple
+## testing correction methods when calling results() (see its
+## documentation)
 
 ## 9. Function plotCounts() gives an overview, per experimental group,
 ## of the expression changes for a gene. Use the which.min function to
@@ -64,6 +68,6 @@ res.incr <- res[order.incr, ]
 ## order() simply calculates a vector of numbers that puts the rows of
 ## the table in the the right order. By default, the ordering is from
 ## low to high; to get a descending order, specify
-## ', decreasing=TRUE' as an extra argument to order()
+## 'decreasing=TRUE' as an extra argument to order()
 
 ## 10. Find the 10 genes that go up most, and those that go down most
