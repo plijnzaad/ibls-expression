@@ -60,16 +60,16 @@ res <- results(dds, contrast=c("group", "Smchd1-null", "WT"))
 ## gene that is most up.
 plotCounts(dds, gene=which.max(res[,'log2FoldChange']), intgroup="group")
 
-## To find the top 10 genes that, in the Smchd1 knock-out, go up most in
-## expression, we have first have to sort the results table. In R, this
-## is done as follows:
+## To find the top 10 genes that, in the Smchd1 knock-out, go down or go
+## up most, we have first have to sort the results table. In R, this is
+## done as follows:
 
 order.incr <- order(res[, 'log2FoldChange'])
 res.incr <- res[order.incr, ]
 
 ## order() simply calculates a vector of numbers that puts the rows of
 ## the table in the the right order. By default, the ordering is from
-## low to high; to get a descending order, specify
-## 'decreasing=TRUE' as an extra argument to order()
+## low to high; to get a descending order, specify 'decreasing=TRUE' as
+## an extra argument to order()
 
 ## 10. Find the 10 genes that go up most, and those that go down most
