@@ -10,10 +10,10 @@ library(devtools)                 # load the library
 install_github("Shians/Glimma")   # Now install the Glimma development version ...
 library(Glimma)                   # ... and load it.
 
-groups <- colData(dds)$group
+groups <- colData(dds)[ ,'group']
 
 ## following genes will be shown in red
-status <- as.numeric(res$padj < 0.01) # (as.numeric converts TRUE/FALSE to 1/0)
+status <- as.numeric(res[, 'padj'] < 0.01) # (as.numeric converts TRUE/FALSE to 1/0)
 
 ## use separate colors per sample in the counts-per-gene plot (topright
 ## panel): blues for WT, reds for knock-out:

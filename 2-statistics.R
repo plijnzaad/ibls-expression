@@ -58,7 +58,7 @@ res <- results(dds, contrast=c("group", "Smchd1-null", "WT"))
 ## To find the top 10 genes that changed most in expression, we have first have to
 ## sort the results table. In R, this is done as follows:
 
-order.incr <- order(res$pvalue)
+order.incr <- order(res[, 'pvalue'])
 res.incr <- res[order.incr, ]
 
 ## order() simply calculates a vector of numbers that puts the rows of
