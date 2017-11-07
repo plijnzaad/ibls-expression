@@ -52,15 +52,15 @@ counts(dds[1000,3])
 counts(dds[101:105, 2:4])
 
 ## But it's better to select rows and colums by name (they not always present, though)
-counts(dds['Smap1', 2:4])                  # note the comma with 'nothing after it', meaning 'the complete row'
+counts(dds['Smap1', 2:4])
 
 ## If, inside the square brackets, you leave a dimension empty, it means: all of that dimension
-counts(dds['Hdhd2',    ])                  # note the 'comma-nothing'. 
+counts(dds['Hdhd2',    ])                  # note the 'comma-nothing': we are selecting *all columns* of row 'Hdhd2'
 
 ## 3. Is gene 'Malat1' abudant or not? 
 
-## 4. What is the grouping of samples? Use the colData function. How
-## many knock-out and how many wt genotypes are there?
+## 4. What is the grouping of samples? Use the colData() function. How
+## many knock-out and how many wild-type (wt) genotypes are there?
 
 ## Have a look at the gene metadata, e.g.:
 
@@ -68,14 +68,14 @@ mcols(dds['Rp1',1])
 
 ## 5. What information is given per gene? On what chromosome does gene Vcp lie?
 
-## Let's look at the distribution of reads counts per gene of a sample, e.g. the first one. 
-## 6. What is the highest expression (use the max() or the summary(function)?
+## Let's look at the distribution of reads counts per gene of a sample, e.g. the first one (i.e.: column 1)
+## 6. What is the highest expression? Use the max() or the summary(function)
 
 ## To find out what gene has this maximum expresssion, use the
 ## which.max() function.  It gives the row number where the maximum
 ## occurs. Easiest to do it in two steps:
 
-maximum.at <- which.max(counts(dds[,1]))
+maximum.at <- which.max(counts(dds[   , 1])) # note the 'nothing-comma': selects the maximum *all rows* of colum 1
 counts(dds[ maximum.at , 1])
 
 ## 7. Which gene is this? Is the same gene the maximally expressed in each sample?
@@ -89,15 +89,16 @@ counts(dds[ maximum.at , 1])
 
 hist(counts(dds[,1]), nclass=1000)
 
-## 10. What does the nclass=1000 argument do?
+## 10. What does the nclass=1000 argument do? Play around with it.
 
-## 11. Use the ', xlim=c(lower, upper), ' argument to just show the bit
-## between 0 and twice the mean of the the read counts. Adjust the
-## nclass argument if needed
+## 11. Use an xlim=c(lower, upper), argument to 'zoom in', i.e. to just
+## show the bit between 0 and twice the mean of the the read counts (you
+## just saved that in a variable, right?). Adjust the nclass argument if
+## needed.
 
 ## Now let's compare the distributions of all the data sets. An easy way
-## to do that is the boxplot() function.  When given a matrix (such as
-## returned by counts(dds)) it will do a boxplot for each of the columns
+## to do that is the boxplot() function.  When given a table such as
+## returned by counts(dds) it will do a boxplot for each of the columns
 ## in the matrix.
 ## 
 ## 12.  Do this, and play with the ylim-argument to make differences
