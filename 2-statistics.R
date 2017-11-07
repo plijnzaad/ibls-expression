@@ -21,6 +21,7 @@ dds <- DESeq(dds)                       #this adds things to the 'dds' object
 ## compare (here: 'group'), which samples are 'treatment', and
 ## which samples are 'control'. It returns a table-like data
 ## structure
+
 res <- results(dds, contrast=c("group", "Smchd1-null", "WT"))
 
 ## 3. The summary() function gives a useful overview of the results
@@ -46,7 +47,7 @@ res <- results(dds, contrast=c("group", "Smchd1-null", "WT"))
 ## 7. The genes Ndn, Mkrn3 and Peg12 are known to be repressed by
 ## Smchd1. Do the statistics confirm this?
 
-## 8. Use plot(x=this, y=that) to make a plot of padj versus pvalue
+## 8. Use plot(x= ... , y= ... ) to make a plot of padj versus pvalue
 ## (remember how you selected columns in the first exercises). Where are
 ## the differences between the two largest? What multiple testing
 ## correction was used? Feel free to play and use different multiple
@@ -58,6 +59,7 @@ res <- results(dds, contrast=c("group", "Smchd1-null", "WT"))
 ## find the most significantly changed gene, and plot its counts. Do the
 ## same for the gene that is 'most down' (any surprises there?), and the
 ## gene that is most up.
+
 plotCounts(dds, gene=which.max(res[,'log2FoldChange']), intgroup="group")
 
 ## To find the top 10 genes that, in the Smchd1 knock-out, go down or go

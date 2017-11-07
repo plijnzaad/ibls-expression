@@ -1,4 +1,5 @@
-### We continue with the previously obtained data, specifically the dds and res objects.
+### We continue with the previously obtained data, specifically the dds
+### and res objects.
 
 ## In order to do further analyses such sa gene set enrichment, we need
 ## to make selections of our genes, based on the fold-change and
@@ -17,7 +18,8 @@ res.not.expressed <- res[not.expressed, ]
 
 ## 1. How many are there (use e.g. the summary function)
 
-## If you apply the function sum() to a vector of logicals it will return the _number_ of TRUEs, e.g.
+## If you apply the function sum() to a vector of logicals it will
+## return the _number_ of TRUEs, e.g.
 
 sum(not.expressed)
 
@@ -30,15 +32,18 @@ sum(not.expressed)
 ## argument 'na.rm' to do this, but that does not work on vectors.
 ## We need a function that returns TRUE for NA, and FALSE otherwise.
 ## That function exists, it is called is.na():
+
 na <- is.na(res[, 'padj'])
 
 ## 3. How many 'NA's are there?  We can use our 'na' vector to select
 ## things from the results table, but we need in fact the exact
 ## opposite: all the rows that are *not* NA.  To negate logical values
 ## there is the '!'  operator (also called the NOT operator):
+
 not.na <- !na
 
 # And now we can do 
+
 res2 <- res[not.na, ]
 
 ## 4. How many genes survive this filtering?
@@ -54,6 +59,7 @@ res2 <- res[not.na, ]
 ## 6. How many genes go up, and have an adjusted p-value better than
 ## 0.01? Same question for the genes going down. Use something like the
 ## following code:
+
 myselection <-  myresults[ , 'padj'] < somevalue & myresults[ , 'log2FoldChange'] > othervalue
 myresults[myselection, ]
 
