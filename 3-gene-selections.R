@@ -51,8 +51,9 @@ res2 <- res[not.na, ]
 ## works as can be expected: a & b is only TRUE if both a AND b have
 ## TRUE
 
-## 6. How many genes go up, and have an adjusted p-value better than 0.01? Same question for
-## the genes going down. Use something like the following code:
+## 6. How many genes go up, and have an adjusted p-value better than
+## 0.01? Same question for the genes going down. Use something like the
+## following code:
 myselection <-  myresults[ , 'padj'] < somevalue & myresults[ , 'log2FoldChange'] > othervalue
 myresults[myselection, ]
 
@@ -65,12 +66,16 @@ myresults[myselection, ]
 genes.up <- rownames( myresults[myselection,] )
 writeLines(con=file("up.txt"), rownames(res[up,]))
 
-## and likewise for the down genes. It is probably easiest to open this text file using Notepad++ or
-## Excel, and then copy-paste things from there to the the web tools.
+## and likewise for the down genes. It is probably easiest to open this
+## text file using Notepad++ or Excel, and then copy-paste things from
+## there to the the web tools.
 
-## 7. Use http://www.geneontology.org/page/go-enrichment-analysis )
-## (or, if that is down, http://integromics.holstegelab.nl/index.php?framesrc=Core/go.cgi&action=search )
-## to analyse your lists of gene names (be sure to select Mouse as
-## species).  Which processes, functions or components are
-## overrepresented in your up and down lists? Which group of genes is
+## 7. Use http://www.geneontology.org/page/go-enrichment-analysis ) to
+## analyse your lists of gene names (be sure to select Mouse as
+## species). Which processes, functions or components are
+## overrepresented in your up- and down-lists? Which group of genes is
 ## responsible for most terms in the up-list?
+
+## Note: if the geneontology site is down, use
+## http://integromics.holstegelab.nl/index.php?framesrc=Core/go.cgi&action=search
+## (the password will be on the whiteboard)
