@@ -20,8 +20,8 @@ documentation of the functions.
 
 The files are, in chronological order (the lecture it goes with is given in parentheses)
 
- * exploring-expression-data.R  ( *Measuring Expression* )
- * statistics.R   ( *Statistics* )
- * gene-selections.R ( *Gene Ontology and Functional Enrichment* )
- * glimma.R  ( no lecture; more like an encore )
+ * 1-exploring-expression-data.R  ( *Measuring Expression* )
+ * 2-statistics.R   ( *Statistics* )
+ * 3-gene-selections.R ( *Gene Ontology and Functional Enrichment* )
+ * 4-glimma.R  ( no lecture; more like an encore )
  
