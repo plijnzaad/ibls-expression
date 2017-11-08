@@ -75,7 +75,8 @@ counts(dds['Hdhd2',    ])                  # note the 'comma-nothing': we are se
 
 ## Have a look at the gene metadata, e.g.:
 
-mcols(dds['Rp1',1])
+mcols(dds['Rp1',])
+
 
 ## 5. What information is given per gene? On what chromosome does gene
 ## Vcp lie?
@@ -125,10 +126,13 @@ mean(mydata,  na.rm=TRUE) # TRUE and FALSE are so-called logical values
 ## to do that is the boxplot() function.  When given a table such as
 ## returned by counts(dds) it will do a boxplot for each of the columns
 ## in the matrix.
-## 
+
+boxplot(counts(dds))
+
 ## 12.  Do this, and supply an ylim-argument to make differences between
 ## the samples clearer. (Make sure that the ylim argument is given to
 ## the hist() function, not to the counts function!)  Which of the
 ## samples is the 'odd one out', based on this? Is it a knock-out or wt
 ## genotype?
 
+boxplot(counts(dds), ylim=c(0,2000))

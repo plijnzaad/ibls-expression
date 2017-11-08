@@ -16,7 +16,7 @@ not.expressed <- (res[,'baseMean'] == 0)   # NOTE: == means 'is equal to',  sing
 
 res.not.expressed <- res[not.expressed, ]
 
-## 1. How many are there (use e.g. the summary function)
+## 1. How many are there (just type the name of the object just created)
 
 ## If you apply the function sum() to a vector of logicals it will
 ## return the _number_ of TRUEs, e.g.
@@ -24,6 +24,8 @@ res.not.expressed <- res[not.expressed, ]
 sum(not.expressed)
 
 ## 2. How many genes have a baseMean higher than 10,000?
+
+sum ( res[,'baseMean'] > 10000 ) 
 
 ## We have seen many NA's in the results table. We have to get rid of
 ## them because these values are 'contageous': many functions will
@@ -40,15 +42,17 @@ na <- is.na(res[, 'padj'])
 ## opposite: all the rows that are *not* NA.  To negate logical values
 ## there is the '!'  operator (also called the NOT operator):
 
-not.na <- !na
+available <- !na
 
 # And now we can do 
 
-res2 <- res[not.na, ]
+res2 <- res[available, ]
 
 ## 4. How many genes survive this filtering?
 
 ## 5. Which genes have a padj value better than 1e-20?
+
+sum( res2[, 'padj']  < 1e-20 )
 
 ## Lastly, we should be able to *combine* several comparison operators,
 ## e.g. select genes that have changed at least 2-fold, but also have a
@@ -57,11 +61,15 @@ res2 <- res[not.na, ]
 ## TRUE
 
 ## 6. How many genes go up, and have an adjusted p-value better than
-## 0.01? Same question for the genes going down. Use something like the
-## following code:
+## 0.01? Same question for the genes going down. 
 
-myselection <-  myresults[ , 'padj'] < somevalue & myresults[ , 'log2FoldChange'] > othervalue
-myresults[myselection, ]
+up <-  res2[ , 'padj'] < 0.01 & res2[ , 'log2FoldChange'] > 0
+
+sum(up)
+
+down <-  res2[ , 'padj'] < 0.01 & res2[ , 'log2FoldChange'] < 0
+
+sum(down)
 
 ## We can now try to see what is so special about these gene lists in
 ## terms of annotation using the Gene Ontology tools available. They
@@ -69,12 +77,17 @@ myresults[myselection, ]
 ## your genes of interest from the results table in combination with
 ## your selection criteria. Write them to a file as follows:
 
-genes.up <- rownames( myresults[myselection,] )
-writeLines(con=file("up.txt"), rownames(res[up,]))
+up.genes <- rownames(res2[up,])
+writeLines(con=file("up.txt", up.genes))
 
-## and likewise for the down genes. It is probably easiest to open this
-## text file using Notepad++ or Excel, and then copy-paste things from
-## there to the web tools.
+down.genes <- rownames(res2[down,])
+myresults[myselection, ]
+
+down.genes <- rownames(res2[down,])
+up.genes <- rownames(res2[up,])
+
+## It is probably easiest to open this text file using Notepad++ or
+## Excel, and then copy-paste things from there to the web tools.
 
 ## 7. Use http://www.geneontology.org/page/go-enrichment-analysis ) to
 ## analyse your lists of gene names (be sure to select Mouse as
