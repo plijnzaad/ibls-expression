@@ -13,15 +13,14 @@ in, amongst others, X-inactivation.
 
 (Liu et al., Genomics Data 7 (2016) 144–147. *Transcriptional profiling of the epigenetic regulator Smchd1* )
 
-The exercises are inside the comments in the R files. Don't blindly
-copy-paste things; try to really understand what is going on, e.g. by
-playing around with function arguments and by looking up the
+All exercises can be found in `transcriptomics.ipynb`.
+
+There are three parts in it, one going with each of the separate
+lectures. (They are all in the same file, because they build on each
+other and therefore all have to be in the same session).
+
+# Important
+
+Don't blindly copy-paste things: try to really understand what is going
+on, e.g. by playing around with function arguments and by looking up the
 documentation of the functions.
-
-The files are, in chronological order (the lecture it goes with is given in parentheses)
-
- * 1-exploring-expression-data.R  ( *Measuring Expression* )
- * 2-statistics.R   ( *Statistics* )
- * 3-gene-selections.R ( *Gene Ontology and Functional Enrichment* )
- * 4-glimma.R  ( no lecture; more like an encore )
- 
