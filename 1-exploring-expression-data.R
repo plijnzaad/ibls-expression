@@ -1,47 +1,49 @@
-## ------------------------------------------------------------------------
-## The following only needs to be done once:
-## 
-## get the biocLite installer script:
-source("http://www.bioconductor.org/biocLite.R") 
-## now install the DESeq2 package:
-biocLite("DESeq2")
-## 
-## ------------------------------------------------------------------------
+## The following only needs to be done only once (and may in fact already
+## be installed).
+## Get the biocLite installer script ...
+## source("http://www.bioconductor.org/biocLite.R")
 
-## If DESeq2 has been installed, you first have to load it into the workspace:
+## ... and use it to install the DESeq2 package:
+## biocLite("DESeq2")
 
+## If DESeq2 has been installed, you can now load it into the current workspace:
+## (this is not done automatically)
 library(DESeq2)
 
-## Download the 'Mouse Neural Stem Cell data from Liu et al.' (GSE65747.rda)
-## data from the course home page.  This data has already been prepared
-## by us. It contains just one big data object called 'dds'. Load it as follows:
 
+## Load the 'Mouse Neural Stem Cell data from Liu et al.' (GSE65747.rda)
+## This data has already been prepared
+## by us. It contains just one big data object called 'dds'. Load it as follows:
 load('GSE65747.rda')
 
-## If you can't find the file you just downloaded you can use the
-## function file.choose(). After picking your file it just returns the
-## full path name as a string. If you assign that string you can
-## subsequently use it
+## What is the name of the object you just loaded (use the ls() function)
+ls()
 
-rda.file <- file.choose()               # '<-' assigns the right-hand side to the left-hand side
-rda.file                                # typing in the name of the object displays the content
-load(rda.file)                          # now use it to load the actual data
+## What is the type of this object? (use the is() or the class() function)
+is(dds)
+class(dds)
 
-## The dds object is a "DESeqDataSet", which is essentially a big table
-## with the counts per gene and per sample. In addition, it contains
+## The object is a "DESeqDataSet", which is essentially a big table with
+## the counts per gene and per sample. In addition, it contains
 ## 'metadata', i.e.  the details of the genes (rows) and samples
 ## (columns).  You can get a quick overview of the data by just typing
-## in the name of the object in the R console.
-
-## 1. How many genes and how how many samples are contained in the object?
+## in the name of the object in the R console. How many genes and how
+## how many samples are contained in the object?
+dds
 
 ## Looking up (meta)data inside the dds object is done using the
-## functions 'counts' for the count data, 'colData' for information per
-## column (such as which experimental group a sample belongs to), and
-## 'mcols' (or: 'values') for the metadata on genes.
+## functions counts() for the actual counts, function colData() for
+## information per column (such as which experimental group a sample
+## belongs to), and mcols() or its synonym values() for the metadata on genes.
+## What metadata is there per sample?
+colData(dds)
 
-## Have a look at the counts data:
+## What metadata is available for each gene?
+mcols(dds)
 
+## Let's have a look at the actual counts. That is too much to print out,
+## so use the head() function to limit the
+## output, and/or summary() for a summary:
 head(counts(dds))                       # head() gives the first rows
 summary(counts(dds))                    # summary statistics per column
 
@@ -50,33 +52,34 @@ summary(counts(dds))                    # summary statistics per column
 ## You can look up the exact counts by specifying the gene (row) and/or
 ## sample (column) in matrix notation. E.g. look up gene number 1000, in
 ## sample 3:
-
 counts(dds[1000,3])
 
 ## To specify a numeric range, use the 'colon operator'. E.g., to show
-## counts for gene gene 'number 101 up to 105', do
+## the counts for gene number 101 to number 105' for samples 2 and 3, do:
+counts(dds[101:105, 2:3])
 
-counts(dds[101:105, 2:4])
-
-## But it's better to select rows and colums by name (they not always
-## present, though)
-
+## But it's better to select rows and colums by name (they may not always
+## present, though):
 counts(dds['Smap1', 2:4])
 
-## If, inside the square brackets, you leave a dimension empty, it
-## means: all of that dimension:
+## If, inside the square brackets, you leave one 'dimension' empty, it
+## means: all of that dimension. E.g., if you 
+counts(dds['Hdhd2',    ])
+## note the 'comma-nothing'
+## 3. Is gene 'Malat1' anbudant or not? 
 
-counts(dds['Hdhd2',    ])                  # note the 'comma-nothing': we are selecting *all columns* of row 'Hdhd2'
+## To refer to a few columns by name we have to use a vector of
+## column names (which are strings). The vector is built using the c() function:
+counts(dds['Hdhd2',   c('A', 'F')  ])
 
-## 3. Is gene 'Malat1' abudant or not? 
-
-## 4. What is the grouping of samples? Use the colData() function. How
-## many knock-out and how many wild-type (wt) genotypes are there?
+## 4. Which sample contains what? The colData() function will extract
+## this so-called 'meta data' from the expression data object; take a
+## look at the 'sample' column. How knock-out and how many wild-type
+## (wt) genotypes are there?
 
 ## Have a look at the gene metadata, e.g.:
 
 mcols(dds['Rp1',])
-
 
 ## 5. What information is given per gene? On what chromosome does gene
 ## Vcp lie?

@@ -7,39 +7,46 @@
 
 ## ------------------------------------------------------------------------
 ## The following needs to be done only once:
-biocLite("devtools")              # install the devtools, needed for installing things from GitHub
-library(devtools)                 # load the library
-install_github("Shians/Glimma")   # Now install the Glimma development version ...
-## 
+##
+## Get the biocLite installer script ...
+source("http://www.bioconductor.org/biocLite.R")
+## ... and use it to install the Glimma library:
+biocLite("Glimma")
 ## ------------------------------------------------------------------------
-
-library(Glimma)                   # load the Glimma library
+library(Glimma)                   # load the Glimma library into the current session
 
 groups <- colData(dds)[ ,'group']
+## dds2 <- dds[ rowSums(counts(dds)) >1 ,  ]
+##n## following genes will be shown in red:
+## dds2 <- DESeq(dds2)
 
-## following genes will be shown in red:
+res <- results(dds, contrast=c("group", "Smchd1-null", "WT"))
 
-status <- as.numeric(res[, 'padj'] < 0.01) # (as.numeric converts TRUE/FALSE to 1/0)
+padj <- res[, 'padj']
+padj[ is.na(padj) ] <- 1
+## status <- as.numeric(res[, 'padj'] < 0.01) # (as.numeric converts TRUE/FALSE to 1/0)
+status <- res[, 'padj'] < 0.01 # (as.numeric converts TRUE/FALSE to 1/0)
 
 ## use separate colors per sample in the counts-per-gene plot (topright
 ## panel): blues for WT, reds for knock-out:
 
-cols <- c('blue', 'LightBlue', 'red', 'pink', 'DarkRed', 'DarkBlue')
+colors <- c('blue', 'LightBlue', 'red', 'pink', 'DarkRed', 'DarkBlue')
 
-## Columns to show in table:
+## Columns to show in table (
 
 display <- c("GeneID", "GeneName", "logFC")
 
 ## interactive MA plot:
 
 glMDPlot(res,
-         status=status,
-         counts=counts(dds),
+         status=as.numeric(status),
+         counts=1+counts(dds),
          samples=colnames(dds),
-         sample.cols=cols,
+         sample.cols=colors,
          anno=mcols(dds),
          groups=groups,
-         display.columns=display)
+         display.columns=display,
+         side.log=TRUE)
 
 ## If all is well, this will create an interactive HTML page and send it
 ## to your browser.  Most elements in the plots and table are
